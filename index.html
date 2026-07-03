@@ -522,6 +522,54 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
     <p class="invite-verse stagger-child">Hoy un sueño se hace realidad.<br>Con la bendición de Dios y mis padres,<br>te invito a celebrar este día tan especial.</p>
   </section>
 
+  <!-- LA FESTEJADA · RETRATO -->
+  <style>
+  .portrait-section{text-align:center;padding:clamp(60px,9vh,92px) 26px;position:relative;overflow:hidden;background:linear-gradient(165deg,#FBF3F6 0%,#F7E4EC 55%,#F4E6EB 100%)}
+  .portrait-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 72% 52% at 50% 44%,rgba(244,164,192,.22) 0%,rgba(244,164,192,0) 70%);pointer-events:none}
+  .portrait-tiara{display:block;margin:0 auto 12px;width:64px;height:auto;filter:drop-shadow(0 2px 6px rgba(164,128,70,.28))}
+  .portrait-frame{position:relative;display:inline-block;margin:8px auto 30px;width:232px;height:300px}
+  .portrait-glow{position:absolute;left:50%;top:50%;width:300px;height:360px;transform:translate(-50%,-50%);background:radial-gradient(ellipse at center,rgba(200,176,138,.28),rgba(244,164,192,.12) 46%,transparent 72%);filter:blur(6px);pointer-events:none;z-index:0}
+  .portrait-ring{position:absolute;inset:-15px;border-radius:50%;background:conic-gradient(from 0deg,rgba(164,128,70,0) 0deg,rgba(164,128,70,.5) 70deg,rgba(224,196,120,.95) 130deg,rgba(164,128,70,.35) 210deg,rgba(164,128,70,0) 320deg);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2.5px),#000 calc(100% - 2px));mask:radial-gradient(farthest-side,transparent calc(100% - 2.5px),#000 calc(100% - 2px));animation:portraitSpin 16s linear infinite;pointer-events:none;z-index:1}
+  .portrait-ring2{position:absolute;inset:-26px;border-radius:50%;border:1px dotted rgba(194,94,134,.5);animation:portraitSpin 24s linear infinite reverse;pointer-events:none;z-index:1}
+  @keyframes portraitSpin{to{transform:rotate(360deg)}}
+  .portrait-img{width:232px;height:300px;object-fit:cover;object-position:center top;border-radius:50% 50% 48% 48% / 56% 56% 44% 44%;border:4px solid rgba(164,128,70,.55);box-shadow:0 12px 36px rgba(90,39,64,.18),0 3px 10px rgba(164,128,70,.22),inset 0 0 0 2px rgba(255,255,255,.6);display:block;position:relative;z-index:2}
+  .portrait-shine{position:absolute;inset:4px;border-radius:50% 50% 48% 48% / 56% 56% 44% 44%;overflow:hidden;pointer-events:none;z-index:3}
+  .portrait-shine::after{content:'';position:absolute;top:0;left:-70%;width:55%;height:100%;background:linear-gradient(105deg,transparent 32%,rgba(255,255,255,.30) 50%,transparent 68%);animation:portraitSweep 7s ease-in-out infinite 1.6s}
+  @keyframes portraitSweep{0%{left:-70%}48%,100%{left:135%}}
+  .portrait-corner{position:absolute;width:38px;height:38px;opacity:.62;z-index:4}
+  .portrait-corner.tl{top:-8px;left:-8px}
+  .portrait-corner.tr{top:-8px;right:-8px;transform:scaleX(-1)}
+  .portrait-corner.bl{bottom:-8px;left:-8px;transform:scaleY(-1)}
+  .portrait-corner.br{bottom:-8px;right:-8px;transform:scale(-1,-1)}
+  .portrait-name{font-family:'Great Vibes',cursive;font-size:46px;color:var(--dark);line-height:1.1;margin-bottom:6px}
+  .portrait-tag{font-family:'Italiana',serif;font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .portrait-divider{width:52px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:14px auto 0}
+  @media(prefers-reduced-motion:reduce){.portrait-ring,.portrait-ring2,.portrait-shine::after{animation:none!important}}
+  </style>
+  <section class="portrait-section rv" id="retrato">
+    <span class="eyebrow stagger-child" style="margin-bottom:6px">La Festejada</span>
+    <svg class="portrait-tiara stagger-child" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M8 33 L15 13 L27 25 L40 7 L53 25 L65 13 L72 33 Z" fill="rgba(200,176,138,.16)" stroke="#A48046" stroke-width="1.5" stroke-linejoin="round"/>
+      <line x1="7" y1="33" x2="73" y2="33" stroke="#A48046" stroke-width="1.7" stroke-linecap="round"/>
+      <circle cx="15" cy="13" r="2.4" fill="#A48046"/><circle cx="40" cy="7" r="2.9" fill="#A48046"/><circle cx="65" cy="13" r="2.4" fill="#A48046"/>
+      <circle cx="40" cy="20" r="2" fill="#C25E86" opacity=".75"/>
+    </svg>
+    <div class="portrait-frame stagger-child">
+      <div class="portrait-glow"></div>
+      <div class="portrait-ring"></div>
+      <div class="portrait-ring2"></div>
+      <svg class="portrait-corner tl" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 34 C2 18 18 2 34 2" stroke="#A48046" stroke-width="1.2" fill="none" opacity=".75"/><circle cx="4" cy="28" r="2.5" fill="#C25E86" opacity=".55"/><circle cx="10" cy="16" r="1.8" fill="#E39EB8" opacity=".75"/><circle cx="22" cy="6" r="2" fill="#A48046" opacity=".55"/></svg>
+      <svg class="portrait-corner tr" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 34 C2 18 18 2 34 2" stroke="#A48046" stroke-width="1.2" fill="none" opacity=".75"/><circle cx="4" cy="28" r="2.5" fill="#C25E86" opacity=".55"/><circle cx="10" cy="16" r="1.8" fill="#E39EB8" opacity=".75"/><circle cx="22" cy="6" r="2" fill="#A48046" opacity=".55"/></svg>
+      <svg class="portrait-corner bl" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 34 C2 18 18 2 34 2" stroke="#A48046" stroke-width="1.2" fill="none" opacity=".75"/><circle cx="4" cy="28" r="2.5" fill="#C25E86" opacity=".55"/><circle cx="10" cy="16" r="1.8" fill="#E39EB8" opacity=".75"/><circle cx="22" cy="6" r="2" fill="#A48046" opacity=".55"/></svg>
+      <svg class="portrait-corner br" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 34 C2 18 18 2 34 2" stroke="#A48046" stroke-width="1.2" fill="none" opacity=".75"/><circle cx="4" cy="28" r="2.5" fill="#C25E86" opacity=".55"/><circle cx="10" cy="16" r="1.8" fill="#E39EB8" opacity=".75"/><circle cx="22" cy="6" r="2" fill="#A48046" opacity=".55"/></svg>
+      <img class="portrait-img" src="retrato.jpg" alt="Retrato de Itzel Anahí en sus XV años" loading="lazy">
+      <div class="portrait-shine"></div>
+    </div>
+    <div class="portrait-name stagger-child">Itzel Anahí</div>
+    <div class="portrait-tag stagger-child">XV Años · 2026</div>
+    <div class="portrait-divider stagger-child"></div>
+  </section>
+
   <!-- CUENTA REGRESIVA -->
   <section class="sec-sm rv" style="text-align:center;background:var(--surface)">
     <span class="eyebrow">Faltan</span>
