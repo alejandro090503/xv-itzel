@@ -92,7 +92,11 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 .hero-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:17px;letter-spacing:.2em;text-transform:uppercase;color:#E8C06A;display:block;margin-bottom:20px;text-shadow:0 1px 10px rgba(0,0,0,.7)}
 .hero-bride,.hero-groom{font-family:'Great Vibes',cursive;font-size:clamp(68px,21vw,94px);color:#FEFCF8;line-height:1;display:block;text-shadow:0 2px 20px rgba(0,0,0,.4),0 1px 6px rgba(0,0,0,.3)}
 .hero-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:38px;color:#E8C06A;display:block;margin:.12em 0;text-shadow:0 1px 10px rgba(0,0,0,.6)}
-.hero-date{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:21px;letter-spacing:4px;color:#E8C06A;margin-top:22px;display:block;text-shadow:0 1px 10px rgba(0,0,0,.7)}
+.hero-quince{display:inline-flex;align-items:center;justify-content:center;gap:14px;margin-bottom:34px}
+.hero-quince .hq-line{width:38px;height:1px;background:linear-gradient(to right,transparent,rgba(232,192,106,.9));display:inline-block}
+.hero-quince .hq-line.r{background:linear-gradient(to left,transparent,rgba(232,192,106,.9))}
+.hero-quince .hq-txt{font-family:'Italiana',serif;font-size:clamp(15px,4.4vw,18px);letter-spacing:.34em;text-transform:uppercase;color:#F3E0AA;display:inline-flex;align-items:baseline;gap:.34em;text-shadow:0 1px 12px rgba(0,0,0,.6)}
+.hero-quince .hq-xv{font-size:1.9em;letter-spacing:.1em;background:linear-gradient(135deg,#F9EBBE,#E8C06A 52%,#C79A44);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 8px rgba(0,0,0,.55))}
 
 /* ── CARD ── */
 .card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:36px 28px;position:relative;margin:0 4px}
@@ -306,38 +310,33 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 }
 
 /* ── GALERÍA RUEDA 3D ── */
-#galeria{padding:72px 28px 80px;text-align:center;overflow:visible;background:var(--surface)}
+#galeria{padding:72px 28px 84px;text-align:center;overflow:visible;background:linear-gradient(180deg,var(--bg) 0%,var(--surface) 100%)}
 .wheel-scene{
-  position:relative;width:calc(100% + 48px);margin-left:-24px;
-  margin-top:36px;overflow:hidden;
+  position:relative;width:100%;height:500px;
+  margin:38px auto 0;perspective:1400px;transform-style:preserve-3d;overflow:visible;
 }
 .wheel-ring{
-  display:flex;gap:14px;
-  overflow-x:auto;overflow-y:hidden;
-  scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;
-  padding:16px 24px 20px;
-  scrollbar-width:none;
+  position:absolute;width:100%;height:100%;
+  transform-style:preserve-3d;cursor:grab;
 }
-.wheel-ring::-webkit-scrollbar{display:none}
+.wheel-ring.dragging{cursor:grabbing}
 .wheel-card{
-  flex:0 0 200px;height:280px;
-  border-radius:12px;overflow:hidden;
-  border:1.5px solid rgba(164,128,70,.22);
-  box-shadow:0 8px 28px rgba(90,39,64,.18);
-  scroll-snap-align:center;
-  transition:transform .3s ease,box-shadow .3s ease;
+  position:absolute;width:200px;height:280px;
+  left:50%;top:50%;margin-left:-100px;margin-top:-140px;
+  border-radius:18px;overflow:hidden;
+  border:2px solid rgba(164,128,70,.38);
+  box-shadow:0 14px 42px rgba(90,39,64,.26),inset 0 0 0 1px rgba(255,255,255,.28);
+  user-select:none;-webkit-user-select:none;
 }
-.wheel-card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(90,39,64,.28)}
 .wheel-card img{
   width:100%;height:100%;
-  object-fit:cover;object-position:center;
+  object-fit:cover;object-position:center top;
   display:block;pointer-events:none;
 }
 .gal-hint{
-  font-family:'Cormorant Garamond',serif;font-style:italic;
-  font-size:13px;letter-spacing:3px;color:var(--gold);
-  margin-top:24px;opacity:.7;
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;
+  font-size:14px;letter-spacing:3px;color:var(--accent);
+  margin-top:22px;opacity:.85;
 }
 
 /* ── LOADER ── */
@@ -494,11 +493,10 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
       <div class="hero-corner hc-br"><svg viewBox="0 0 24 24" fill="none"><path d="M1 1L1 11M1 1L11 1" stroke="#A48046" stroke-width="1.4" opacity=".7"/></svg></div>
     </div>
     <div class="hero-content">
-      <span class="hero-tag rv">Mis XV Años</span>
+      <div class="hero-quince rv"><span class="hq-line"></span><span class="hq-txt">Mis&nbsp;<span class="hq-xv">XV</span>&nbsp;Años</span><span class="hq-line r"></span></div>
       <span class="hero-bride rv">Itzel</span>
       <span class="hero-amp rv">·</span>
       <span class="hero-groom rv">Anahí</span>
-      <span class="hero-date rv">Lunes · 20 de Julio</span>
     </div>
     <div class="scroll-hint" id="scrollHint">
       <div class="scroll-hint-line"></div>
@@ -764,36 +762,11 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
         <div class="wheel-card"><img src="foto2.jpg" alt="Itzel Anahí en sus XV años" loading="lazy"></div>
         <div class="wheel-card"><img src="foto3.jpg" alt="Itzel Anahí en sus XV años" loading="lazy"></div>
         <div class="wheel-card"><img src="foto4.jpg" alt="Itzel Anahí en sus XV años" loading="lazy"></div>
+        <div class="wheel-card"><img src="foto5.jpg" alt="Itzel Anahí en sus XV años" loading="lazy"></div>
+        <div class="wheel-card"><img src="foto6.jpg" alt="Itzel Anahí en sus XV años" loading="lazy"></div>
       </div>
     </div>
-    <p class="gal-hint rv">Desliza para ver más</p>
-  </section>
-
-  <!-- MESA DE REGALOS -->
-  <section id="regalos" class="sec rv" style="text-align:center">
-    <span class="eyebrow">Mesa de Regalos</span>
-    <h2 class="heading" style="color:var(--gold-light)">Un Obsequio</h2>
-    <div class="orn" style="margin-top:14px;margin-bottom:0"><div class="orn-line" style="background:linear-gradient(to right,transparent,rgba(164,128,70,.4),transparent)"></div><div class="orn-diamond-sm" style="background:var(--gold)"></div><div class="orn-diamond" style="background:var(--gold)"></div><div class="orn-diamond-sm" style="background:var(--gold)"></div><div class="orn-line" style="background:linear-gradient(to right,transparent,rgba(164,128,70,.4),transparent)"></div></div>
-    <!-- Gift icon -->
-    <div class="gift-icon-wrap rv">
-      <svg viewBox="0 0 72 64" width="72" height="64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M36 16 C32 5 20 1 16 8 C12 14 19 21 31 17 C33.5 16.2 36 16 36 16Z" fill="rgba(200,176,138,.18)" stroke="#C8B08A" stroke-width="1.3" stroke-linejoin="round"/>
-        <path d="M36 16 C40 5 52 1 56 8 C60 14 53 21 41 17 C38.5 16.2 36 16 36 16Z" fill="rgba(200,176,138,.18)" stroke="#C8B08A" stroke-width="1.3" stroke-linejoin="round"/>
-        <ellipse cx="36" cy="16" rx="4.5" ry="3.5" fill="rgba(164,128,70,.38)" stroke="#C8B08A" stroke-width="1"/>
-        <rect x="6" y="16" width="60" height="13" rx="2" fill="rgba(200,176,138,.1)" stroke="#A48046" stroke-width="1.2"/>
-        <rect x="33" y="16" width="6" height="13" fill="rgba(164,128,70,.18)"/>
-        <rect x="10" y="29" width="52" height="34" rx="2" fill="rgba(200,176,138,.07)" stroke="#A48046" stroke-width="1.2"/>
-        <line x1="36" y1="29" x2="36" y2="63" stroke="#A48046" stroke-width="1.3" opacity=".5"/>
-        <line x1="10" y1="46" x2="62" y2="46" stroke="#A48046" stroke-width=".9" opacity=".28"/>
-      </svg>
-    </div>
-    <!-- Framed message -->
-    <div class="gift-frame rv">
-      <div class="g-corner tl"></div><div class="g-corner tr"></div>
-      <div class="g-corner bl"></div><div class="g-corner br"></div>
-      <p class="gift-msg" style="margin:0">Tu presencia es mi regalo más preciado.<br>Si deseas obsequiarme algo,<br>con infinita gratitud lo recibiré.</p>
-    </div>
-    <p style="font-family:'Italiana',serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-light);opacity:.7;margin-top:26px">Información por confirmar</p>
+    <p class="gal-hint rv">Arrastra para girar</p>
   </section>
 
   <!-- ÁLBUM COMPARTIDO -->
@@ -1078,20 +1051,44 @@ function initMain(){
     setTimeout(()=>t.classList.remove('show'),2400);
   };
 
-  /* ── GALERÍA SCROLL HORIZONTAL ── */
-  (function initGallery(){
+  /* ── GALERÍA · RUEDA 3D (drag para girar) ── */
+  (function initWheel(){
     var ring = document.getElementById('wheel-ring');
     if(!ring) return;
-    /* Scroll to 3rd card on init for visual hint that there's more */
-    var thirdCard = ring.children[2];
-    if(thirdCard){
-      setTimeout(function(){
-        ring.scrollTo({ left: thirdCard.offsetLeft - 24, behavior: 'smooth' });
-      }, 800);
-      setTimeout(function(){
-        ring.scrollTo({ left: 0, behavior: 'smooth' });
-      }, 2200);
+    var cards = ring.querySelectorAll('.wheel-card');
+    var n = cards.length;
+    if(!n) return;
+    var radius = 230;
+    var rot = 0, vel = 0, isDrag = false, startX = 0, startRot = 0, lastX = 0, rafId = null;
+
+    cards.forEach(function(card,i){
+      card.style.transform = 'rotateY(' + (360/n*i) + 'deg) translateZ(' + radius + 'px)';
+    });
+
+    function setRot(){ gsap.set(ring,{rotateY:rot}); }
+    setRot();
+
+    function inertia(){
+      if(isDrag) return;
+      rot += vel; vel *= 0.94; setRot();
+      if(Math.abs(vel) > 0.05){ rafId = requestAnimationFrame(inertia); }
     }
+    function pointerDown(x){ isDrag=true; ring.classList.add('dragging'); startX=x; lastX=x; startRot=rot; vel=0; if(rafId) cancelAnimationFrame(rafId); }
+    function pointerMove(x){ if(!isDrag) return; var dx=x-startX; rot=startRot+dx*0.45; vel=(x-lastX)*0.5; lastX=x; setRot(); }
+    function pointerUp(){ if(!isDrag) return; isDrag=false; ring.classList.remove('dragging'); rafId=requestAnimationFrame(inertia); }
+
+    ring.addEventListener('mousedown', function(e){ e.preventDefault(); pointerDown(e.clientX); });
+    window.addEventListener('mousemove', function(e){ pointerMove(e.clientX); });
+    window.addEventListener('mouseup', pointerUp);
+    ring.addEventListener('touchstart', function(e){ pointerDown(e.touches[0].clientX); }, {passive:true});
+    ring.addEventListener('touchmove', function(e){ pointerMove(e.touches[0].clientX); }, {passive:true});
+    ring.addEventListener('touchend', pointerUp);
+
+    /* giro lento automático hasta el primer arrastre */
+    var auto = true;
+    (function spin(){ if(auto && !isDrag){ rot += 0.12; setRot(); } requestAnimationFrame(spin); })();
+    ring.addEventListener('mousedown', function(){ auto=false; });
+    ring.addEventListener('touchstart', function(){ auto=false; });
   })();
 
 }
