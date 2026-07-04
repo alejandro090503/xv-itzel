@@ -37,8 +37,9 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 
 /* ── ENVELOPE ── */
 #envelope-screen{position:fixed;inset:0;z-index:9000;background:#FBF3F6;overflow:hidden;cursor:pointer;opacity:1}
-#envImage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+#envImage,#envVideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 #envImage{opacity:0}
+#envVideo{opacity:0}
 .env-tap{position:absolute;bottom:72px;left:50%;transform:translateX(-50%);z-index:10;font-family:'Italiana',serif;font-size:14px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);opacity:0;padding:16px 40px;white-space:nowrap;border:1px solid rgba(164,128,70,.45);border-radius:50px;background:rgba(251,243,246,.25);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .env-tap::before{content:'';position:absolute;inset:0;border-radius:50px;animation:envpulse 2s ease-out infinite}
 @keyframes envpulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.28);opacity:0}}
@@ -472,7 +473,8 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 <div id="petals"></div>
 
 <div id="envelope-screen">
-  <img id="envImage" src="sobre.png" alt="Invitación de XV años de Itzel Anahí">
+  <img id="envImage" src="sobre.jpg" alt="Invitación de XV años de Itzel Anahí">
+  <video id="envVideo" src="https://bsjoelxktbvlavfoozhk.supabase.co/storage/v1/object/public/fotos-clientes/video/xv-itzel/apertura.mp4" muted playsinline preload="auto" poster="sobre.jpg"></video>
   <div class="env-tap" id="envTap">Toca para abrir</div>
 </div>
 
@@ -885,6 +887,7 @@ gsap.registerPlugin(ScrollTrigger);
 function initEnvelope(){
   const envScreen=document.getElementById('envelope-screen'),
         envImage=document.getElementById('envImage'),
+        envVideo=document.getElementById('envVideo'),
         envTap=document.getElementById('envTap'),
         mainWrap=document.querySelector('.wrap');
   let tapped=false;
@@ -894,13 +897,34 @@ function initEnvelope(){
     if(tapped)return;tapped=true;e.preventDefault();
     if(typeof window._startAudio==='function')window._startAudio();
     gsap.to(envTap,{opacity:0,duration:.3});
-    /* Revelación elegante: preparar contenido debajo, luego zoom+fade del sobre */
-    mainWrap.style.visibility='visible';
-    gsap.to(envImage,{scale:1.14,duration:.95,ease:'power2.in'});
-    gsap.to(envScreen,{opacity:0,duration:.7,delay:.15,ease:'power2.inOut',onComplete:function(){
-      envScreen.style.display='none';
-      initMain();
-    }});
+
+    var finishCalled=false;
+    envVideo.currentTime=0;
+
+    function doPlay(){
+      var p=envVideo.play();
+      if(p!==undefined) p.catch(function(){});
+      function crossfade(){
+        gsap.to(envImage,{opacity:0,duration:.45,ease:'power2.inOut'});
+        gsap.to(envVideo,{opacity:1,duration:.45,ease:'power2.inOut'});
+      }
+      if(envVideo.readyState>=2){ crossfade(); }
+      else { envVideo.addEventListener('playing',crossfade,{once:true}); setTimeout(crossfade,700); }
+    }
+    if(envVideo.readyState>=2){ doPlay(); }
+    else { envVideo.load(); envVideo.addEventListener('canplay',doPlay,{once:true}); setTimeout(doPlay,1600); }
+
+    function finish(){
+      if(finishCalled)return;finishCalled=true;
+      /* Preparar contenido debajo y desvanecer el sobre al terminar el video */
+      mainWrap.style.visibility='visible';
+      gsap.to(envScreen,{opacity:0,duration:.6,ease:'power2.inOut',onComplete:function(){
+        envScreen.style.display='none';
+        initMain();
+      }});
+    }
+    envVideo.addEventListener('ended',finish,{once:true});
+    setTimeout(finish,9000);
   }
   envScreen.addEventListener('click',onTap,{passive:false});
   envScreen.addEventListener('touchstart',onTap,{passive:false});
