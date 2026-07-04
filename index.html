@@ -200,18 +200,18 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 
 /* ── RSVP ── */
 .rsvp-deadline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;letter-spacing:.5px;color:var(--gold);margin-bottom:26px;display:block;text-align:center}
-.btn-wa{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:6px;background:var(--dark);color:var(--gold-light);border:none;cursor:pointer;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:18px;letter-spacing:.05em;padding:17px 24px;border-radius:50px;transition:background .3s}
-.btn-wa:hover{background:var(--accent)}
+.btn-wa{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:6px;background:linear-gradient(135deg,#DB74A0 0%,#C25E86 55%,#A83E68 100%);color:#FFF5FA;border:none;cursor:pointer;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:19px;letter-spacing:.05em;padding:17px 24px;border-radius:50px;box-shadow:0 6px 18px rgba(194,94,134,.32);transition:filter .3s}
+.btn-wa:hover{filter:brightness(1.07)}
 .btn-wa svg{width:20px;height:20px;fill:currentColor;flex-shrink:0}
 
 /* ── FOOTER ── */
-#footer{padding:72px 32px 52px;text-align:center;background:linear-gradient(175deg,#3C1A2E 0%,#5A2740 35%,#4A2035 65%,#2A1120 100%);position:relative;overflow:visible}
-#footer::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(164,128,70,.06) 0%,transparent 70%);pointer-events:none}
-#footer::after{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(to right,transparent,rgba(164,128,70,.3),rgba(200,176,138,.5),rgba(164,128,70,.3),transparent)}
-.footer-date{font-family:'Italiana',serif;font-size:13px;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);opacity:.55;margin-top:16px}
-.footer-hr{width:50px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:28px auto 18px;opacity:.3}
-.footer-credit{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;letter-spacing:.5px;color:rgba(164,128,70,.3);text-decoration:none;display:block;transition:color .3s}
-.footer-credit:hover{color:var(--gold)}
+#footer{padding:72px 32px 54px;text-align:center;background:linear-gradient(175deg,#FCEFF4 0%,#F6D9E4 50%,#EFC3D5 100%);position:relative;overflow:visible}
+#footer::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 38%,rgba(255,255,255,.42) 0%,transparent 70%);pointer-events:none}
+#footer::after{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(to right,transparent,rgba(164,128,70,.35),rgba(194,94,134,.55),rgba(164,128,70,.35),transparent)}
+.footer-date{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:18px;letter-spacing:.14em;text-transform:uppercase;color:var(--dark);opacity:.92;margin-top:16px}
+.footer-hr{width:56px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:26px auto 18px;opacity:.55}
+.footer-credit{font-family:'Italiana',serif;font-size:15px;letter-spacing:.14em;color:var(--dark);opacity:.72;text-decoration:none;display:block;transition:color .3s}
+.footer-credit:hover{color:var(--accent);opacity:1}
 
 /* ── MUSIC (vinyl) ── */
 .vinyl-btn{
@@ -346,14 +346,14 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 .sec-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;pointer-events:none;z-index:-1}
 
 /* ── INVITACIÓN VERSE ── */
-.invite-verse{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:clamp(16px,4vw,18px);line-height:1.9;color:var(--text);text-align:center;opacity:.85;max-width:280px;margin:22px auto 0;padding:18px 6px;border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);position:relative}
+.invite-verse{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:clamp(17px,4.6vw,19px);line-height:1.85;color:var(--text);text-align:center;opacity:1;max-width:295px;margin:22px auto 0;padding:18px 6px;border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);position:relative}
 .invite-verse::before{content:'\201C';position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-family:'Great Vibes',cursive;font-size:54px;color:var(--gold);opacity:.2;line-height:1;pointer-events:none}
 
 /* ── COUNTDOWN GLOW ── */
 .cd-wrap{position:relative;max-width:380px;margin:0 auto}
 .cd-ring{position:absolute;inset:-10px;border-radius:14px;border:1px solid rgba(164,128,70,.1);pointer-events:none;animation:cdRing 4.5s ease-in-out infinite}
 @keyframes cdRing{0%,100%{border-color:rgba(164,128,70,.1);box-shadow:0 0 0 0 rgba(164,128,70,0)}50%{border-color:rgba(164,128,70,.26);box-shadow:0 0 30px rgba(164,128,70,.07)}}
-.cd-para{font-family:'Italiana',serif;font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);opacity:.42;display:block;text-align:center;margin-top:16px}
+.cd-para{font-family:'Italiana',serif;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:#7d5f2b;opacity:.92;display:block;text-align:center;margin-top:16px}
 .cd-value{text-shadow:0 0 28px rgba(164,128,70,.12)}
 
 /* ── FAMILIAS RINGS ── */
@@ -453,11 +453,11 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 /* ── FOOTER MONOGRAM ── */
 .footer-monogram-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:28px;position:relative;overflow:visible}
 .footer-initials{display:flex;align-items:baseline;gap:8px;margin-bottom:12px;overflow:visible}
-.fi-letter{font-family:'Great Vibes',cursive;font-size:58px;line-height:1.5;padding:12px 24px;margin:-12px -16px;background:linear-gradient(135deg,#D4B896 0%,#A48046 50%,#C8B08A 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.fi-letter{font-family:'Great Vibes',cursive;font-size:66px;line-height:1.5;padding:12px 24px;margin:-12px -16px;background:linear-gradient(135deg,#DB74A0 0%,#A83E68 52%,#C25E86 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .fi-amp{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:#C8B08A;opacity:.5;align-self:center;margin:0 4px}
-.footer-orn-line{display:flex;align-items:center;gap:10px;opacity:.35}
-.footer-orn-line .fo-line{width:48px;height:1px;background:linear-gradient(to right,transparent,#C8B08A)}
-.footer-orn-line .fo-line:last-child{background:linear-gradient(to left,transparent,#C8B08A)}
+.footer-orn-line{display:flex;align-items:center;gap:10px;opacity:.55}
+.footer-orn-line .fo-line{width:48px;height:1px;background:linear-gradient(to right,transparent,#C2778F)}
+.footer-orn-line .fo-line:last-child{background:linear-gradient(to left,transparent,#C2778F)}
 .footer-orn-line .fo-diamond{width:5px;height:5px;background:#A48046;transform:rotate(45deg)}
 
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
@@ -509,13 +509,13 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 
   <!-- INVITACIÓN -->
   <section class="sec rv" style="text-align:center;overflow:hidden">
-    <div class="sec-bg" style="background-image:url('botanica2.png');opacity:.22"></div>
+    <div class="sec-bg" style="background-image:url('fondo-gracia.jpg');opacity:.6"></div>
     <span class="eyebrow stagger-child">Con la gracia de Dios</span>
     <div class="orn stagger-child"><div class="orn-line"></div><div class="orn-diamond-sm"></div><div class="orn-diamond"></div><div class="orn-diamond-sm"></div><div class="orn-line"></div></div>
     <h1 class="heading stagger-child">Itzel Anahí</h1>
-    <p class="sub stagger-child" style="margin-top:8px;font-weight:600;color:var(--gold)">te invito a<br>mis XV años</p>
+    <p class="sub stagger-child" style="margin-top:10px;font-weight:700;color:var(--gold);font-size:23px;opacity:1">te invito a<br>mis XV años</p>
     <div class="orn bot stagger-child"><div class="orn-line"></div><div class="orn-diamond-sm"></div><div class="orn-diamond"></div><div class="orn-diamond-sm"></div><div class="orn-line"></div></div>
-    <p class="stagger-child" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--text);line-height:1.8;margin-top:24px;opacity:.8">
+    <p class="stagger-child" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:20px;color:var(--text);line-height:1.8;margin-top:24px;opacity:.95">
       Lunes, 20 de Julio de 2026<br>
       Nazas, Durango
     </p>
@@ -572,7 +572,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
 
   <!-- CUENTA REGRESIVA -->
   <section class="sec-sm rv" style="text-align:center;background:var(--surface)">
-    <span class="eyebrow">Faltan</span>
+    <span class="eyebrow" style="font-size:22px;color:#8a6a30">Faltan</span>
     <div class="cd-wrap">
     <div class="cd-ring"></div>
     <div class="card" style="margin:0 auto">
@@ -622,9 +622,6 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
       <span class="fam-name">Blas Sánchez<br>Ibarra</span>
       <div class="fam-and"><div class="fam-and-line"></div><span class="fam-and-txt">y</span><div class="fam-and-line"></div></div>
       <span class="fam-name">Norma Alicia<br>Torres Soto</span>
-      <div style="border-top:1px solid var(--border);margin:22px -14px 20px"></div>
-      <span class="fam-role-lbl">Mis Padrinos</span>
-      <span class="fam-name" style="font-size:22px">Por confirmar</span>
     </div>
   </section>
 
@@ -712,6 +709,9 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
       <div class="itin-item rv"><div class="itin-dot"></div><div class="itin-time">4:00 p.m.</div><div class="itin-ev">Misa de XV Años</div></div>
       <div class="itin-item rv"><div class="itin-dot sage"></div><div class="itin-time">6:00 p.m.</div><div class="itin-ev">Recepción</div></div>
       <div class="itin-item rv"><div class="itin-dot"></div><div class="itin-time">6:30 p.m.</div><div class="itin-ev">Cena</div></div>
+      <div class="itin-item rv"><div class="itin-dot sage"></div><div class="itin-time">9:00 p.m.</div><div class="itin-ev">Brindis</div></div>
+      <div class="itin-item rv"><div class="itin-dot"></div><div class="itin-time">10:00 p.m.</div><div class="itin-ev">Vals</div></div>
+      <div class="itin-item rv"><div class="itin-dot sage"></div><div class="itin-time">10:30 p.m.</div><div class="itin-ev">Baile</div></div>
     </div>
   </section>
 
