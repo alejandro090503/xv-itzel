@@ -817,7 +817,7 @@ body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',ser
         <button class="rsvp-toggle-btn" id="btnNo" type="button">No podré</button>
       </div>
       <div class="rsvp-fields" id="rsvp-fields"></div>
-      <button class="btn-wa" id="btnConfirmar" type="button" style="margin-top:18px;justify-content:center"><span id="rsvp-btn-text">Confirmar Asistencia</span></button>
+      <button class="btn-wa" id="btnConfirmar" type="button" style="margin-top:18px;justify-content:center"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.5-.9-2.1-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 4.9L2 22l5.2-1.4C8.6 21.5 10.3 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg><span id="rsvp-btn-text">Confirmar por WhatsApp</span></button>
       <p class="rsvp-feedback" id="rsvp-feedback"></p>
     </div>
   </section>
@@ -1107,13 +1107,13 @@ function initMain(){
 
 /* ── RSVP · PANEL DE INVITADOS ── */
 (function initRsvp(){
-  var PANEL_API = 'https://panel-invitados.vercel.app/api/confirmar';
-  var RSVP_URL  = 'https://xv-itzel.vercel.app';
-  var DEADLINE  = new Date(2026, 6, 15, 23, 59, 59, 999); // 15 julio 2026
-  var frozen    = Date.now() > DEADLINE.getTime();
-  var params    = new URLSearchParams(window.location.search);
-  var urlPara   = (params.get('para') || '').trim();
-  var rawP      = parseInt(params.get('pases') || '1', 10);
+  var WA_PHONE = '5216711121098';               // 671 112 1098
+  var FECHA    = 'lunes 20 de julio de 2026';
+  var DEADLINE = new Date(2026, 6, 15, 23, 59, 59, 999); // 15 julio 2026
+  var frozen   = Date.now() > DEADLINE.getTime();
+  var params   = new URLSearchParams(window.location.search);
+  var urlPara  = (params.get('para') || '').trim();
+  var rawP     = parseInt(params.get('pases') || '1', 10);
   var pasesAsignados = (isNaN(rawP) || rawP < 1 || rawP > 20) ? 1 : rawP;
 
   var rsvpChoice = null, savedNames = [];
@@ -1132,10 +1132,8 @@ function initMain(){
     noteEl.textContent = 'Esta invitación es para ' + urlPara;
     noteEl.style.display = 'block';
     dispEl.style.display = 'flex';
-    btnYes.disabled = true; btnNo.disabled = true;
-  } else {
-    numEl.textContent = pasesAsignados;
   }
+  numEl.textContent = pasesAsignados;
 
   function renderFields(n){
     fieldsEl.innerHTML = '';
@@ -1143,87 +1141,53 @@ function initMain(){
       var inp = document.createElement('input');
       inp.type='text'; inp.className='rsvp-input';
       inp.placeholder = n===1 ? 'Tu nombre completo' : 'Invitado ' + (i+1);
-      inp.autocomplete='off'; inp.maxLength=60; inp.value = savedNames[i] || '';
+      inp.autocomplete='off'; inp.maxLength=60;
+      inp.value = (savedNames[i] !== undefined ? savedNames[i] : (i===0 ? urlPara : ''));
       (function(idx){ inp.addEventListener('input', function(){ savedNames[idx]=this.value; }); })(i);
       fieldsEl.appendChild(inp);
     }
+    fieldsEl.style.display='flex';
   }
 
   function selectRsvp(choice){
     rsvpChoice = choice;
+    feedEl.textContent='';
     if(choice==='yes'){
       btnYes.className='rsvp-toggle-btn rsvp-toggle-selected-yes';
       btnNo.className ='rsvp-toggle-btn';
       renderFields(pasesAsignados);
-      fieldsEl.style.display='flex';
     } else {
       btnYes.className='rsvp-toggle-btn';
       btnNo.className ='rsvp-toggle-btn rsvp-toggle-selected-no';
-      fieldsEl.style.display='none'; fieldsEl.innerHTML='';
+      renderFields(1);
     }
   }
 
   btnYes.addEventListener('click', function(){selectRsvp('yes')});
   btnNo.addEventListener('click',  function(){selectRsvp('no')});
 
-  if(urlPara){
-    fetch(PANEL_API + '?nombre=' + encodeURIComponent(urlPara) + '&url_boda=' + encodeURIComponent(RSVP_URL))
-      .then(function(r){ return r.json(); })
-      .then(function(resp){
-        var d = resp.invitado;
-        if(d && typeof d.pases==='number' && d.pases>0 && d.pases<=20){ pasesAsignados = d.pases; }
-        numEl.textContent = pasesAsignados;
-        btnYes.disabled=false; btnNo.disabled=false;
-        if(d && (d.estado==='confirmado' || d.estado==='declino')){
-          if(d.nombres_confirmados && d.nombres_confirmados.length){ savedNames = d.nombres_confirmados.slice(); }
-          selectRsvp(d.estado==='confirmado' ? 'yes' : 'no');
-          btnText.textContent = 'Actualizar respuesta';
-          feedEl.textContent = d.estado==='confirmado'
-            ? '¡Ya tienes confirmada tu asistencia! Puedes actualizar tu respuesta.'
-            : 'Ya tienes registrado que no podrás asistir. Puedes cambiar tu respuesta.';
-        }
-      })
-      .catch(function(){ numEl.textContent = pasesAsignados; btnYes.disabled=false; btnNo.disabled=false; });
-  }
-
   if(frozen){
     btnYes.disabled=true; btnNo.disabled=true; btnConf.disabled=true;
     btnText.textContent='Fecha límite alcanzada';
     feedEl.textContent='La fecha para confirmar asistencia ha pasado.';
+    return;
   }
 
   btnConf.addEventListener('click', function(){
-    if(frozen) return;
-    if(!rsvpChoice){ feedEl.style.color='#9a4a3a'; feedEl.textContent='Por favor selecciona si asistirás o no.'; return; }
+    if(!rsvpChoice){ feedEl.style.color='#9a4a3a'; feedEl.textContent='Por favor elige si asistirás o no.'; return; }
+    var inputs = fieldsEl.querySelectorAll('.rsvp-input');
     var nombres = [];
-    if(rsvpChoice==='yes'){
-      var inputs = fieldsEl.querySelectorAll('.rsvp-input');
-      for(var i=0;i<inputs.length;i++){ var v=inputs[i].value.trim(); if(v) nombres.push(v); }
-      if(nombres.length===0){ feedEl.style.color='#9a4a3a'; feedEl.textContent='Por favor escribe al menos un nombre.'; return; }
-    }
-    btnText.textContent='Enviando…'; btnConf.disabled=true; feedEl.textContent=''; feedEl.style.color='';
-    fetch(PANEL_API, {
-      method:'POST', headers:{ 'Content-Type':'application/json' },
-      body: JSON.stringify({
-        nombre: urlPara || 'Invitado',
-        url_boda: RSVP_URL,
-        estado: rsvpChoice==='yes' ? 'confirmado' : 'declino',
-        pases_confirmados: rsvpChoice==='yes' ? nombres.length : 0,
-        nombres_confirmados: nombres
-      })
-    })
-    .then(function(r){ return r.json(); })
-    .then(function(){
-      btnText.textContent='Actualizar respuesta'; btnConf.disabled=false;
-      feedEl.style.color='var(--gold)';
-      feedEl.textContent = rsvpChoice==='yes'
-        ? '¡Tu asistencia ha sido confirmada! Nos vemos el 20 de julio.'
-        : 'Hemos registrado que no podrás asistir. ¡Gracias por avisar!';
-    })
-    .catch(function(){
-      btnText.textContent='Confirmar Asistencia'; btnConf.disabled=false;
-      feedEl.style.color='#9a4a3a'; feedEl.textContent='Error de conexión. Intenta de nuevo.';
-    });
+    for(var i=0;i<inputs.length;i++){ var v=inputs[i].value.trim(); if(v) nombres.push(v); }
+    if(nombres.length===0){ feedEl.style.color='#9a4a3a'; feedEl.textContent='Por favor escribe tu nombre.'; return; }
+    var quien = nombres.join(', ');
+    var msg = (rsvpChoice==='yes')
+      ? '¡Hola! Confirmo mi asistencia a los XV años de Itzel Anahí (' + FECHA + '). Asistirá(n): ' + quien + '.'
+      : '¡Hola! Con mucha pena, no podré asistir a los XV años de Itzel Anahí (' + FECHA + '). — ' + quien;
+    window.open('https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    feedEl.style.color = (rsvpChoice==='yes') ? 'var(--accent)' : 'var(--dark)';
+    feedEl.textContent = (rsvpChoice==='yes')
+      ? '¡Gracias! Se abrió WhatsApp para enviar tu confirmación.'
+      : 'Gracias por avisar. Se abrió WhatsApp para enviar tu mensaje.';
   });
 })();
 
